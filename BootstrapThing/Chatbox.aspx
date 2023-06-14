@@ -51,10 +51,6 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
-
-        .logout-button {
-            margin-left: 10px;
-        }
     </style>
 </head>
 <body>
@@ -130,7 +126,7 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.error === 'none') {
-                            // Refresh chat messages on success
+                            document.getElementById('txtMessage').value = '';
                             getChatMessages();
                         } else {
                             // Show modal and play MP3 file on error
