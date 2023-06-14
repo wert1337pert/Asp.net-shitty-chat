@@ -45,11 +45,11 @@
         }
 
         .moderator {
-            color: midnightblue;
+            color: firebrick;
         }
 
         .normaluser{
-            color: brown;
+            color: midnightblue;
         }
 
         .username-label {
