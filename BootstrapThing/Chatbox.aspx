@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Chatbox.aspx.cs" Inherits="BootstrapThing.Chatbox" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.5);
         }
-        
+
         .modal-content {
             background-color: #fefefe;
             margin: 20% auto;
@@ -26,25 +27,29 @@
             width: 80%;
             text-align: center;
         }
-        
+
         .modal-close {
             position: absolute;
             top: 10px;
             right: 10px;
             cursor: pointer;
         }
-        
+
         /* Chat Message Styles */
         .message {
             margin-bottom: 10px;
         }
-        
+
         .sender {
             font-weight: bold;
         }
-        
+
         .moderator {
-            color: yellow;
+            color: midnightblue;
+        }
+
+        .normaluser{
+            color: brown;
         }
 
         .username-label {
@@ -56,7 +61,7 @@
 <body>
     <form runat="server">
         <div class="container">
-            <h1>Chatbox</h1>
+            <h1>Chatbox - Static</h1>
             <div class="chat-container">
                 <asp:Panel ID="pnlMessages" runat="server">
                     <!-- Messages will be dynamically generated here -->
@@ -64,8 +69,9 @@
             </div>
             <asp:Panel ID="pnlChat" runat="server" CssClass="chat-form">
                 <asp:TextBox ID="txtMessage" runat="server" placeholder="Type your message..."></asp:TextBox>
-                <asp:Button ID="btnSend" runat="server" Text="Send" OnClientClick="sendChatMessage(); return false;" />
-                <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CssClass="logout-button" />
+                <asp:Button ID="btnSend" runat="server" Text="Send" OnClientClick="sendChatMessage(); return false;" CssClass="button buttonCool" />
+                <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CssClass="button buttonCool" />
+
             </asp:Panel>
         </div>
 
@@ -98,6 +104,8 @@
                             senderSpan.classList.add('sender');
                             if (message.IsMod) {
                                 senderSpan.classList.add('moderator');
+                            } else {
+                                senderSpan.classList.add('normaluser');
                             }
 
                             const contentSpan = document.createElement('span');

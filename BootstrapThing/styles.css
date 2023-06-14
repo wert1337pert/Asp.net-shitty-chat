@@ -59,16 +59,14 @@ form a {
     margin-bottom: 10px;
 }
 
-    .message .sender {
-        font-weight: bold;
-        margin-right: 5px;
-    }
+.message .sender {
+    font-weight: bold;
+    margin-right: 5px;
+}
 
 .chat-form input {
     padding: 10px;
     border-radius: 3px;
-    border: 1px solid #D3D3D3;
-    margin-right: 5px;
 }
 
 .chat-form button {
@@ -81,3 +79,32 @@ form a {
     cursor: pointer;
     border-radius: 3px;
 }
+
+.button {
+    background-color: white;
+    border: 1px solid #D3D3D3;
+    color: black;
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.btn-group .button:not(:last-child) {
+    border-bottom: none;
+}
+
+.buttonCool {
+    background-color: white;
+    color: black;
+}
+
+    .buttonCool:hover {
+        background-color: dimgray;
+        color: white;
+    }

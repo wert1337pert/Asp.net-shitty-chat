@@ -13,7 +13,7 @@
                 <asp:TextBox ID="txtUsername" runat="server" placeholder="Username"></asp:TextBox>
                 <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="Password"></asp:TextBox>
                 <asp:TextBox ID="txtEmail" runat="server" placeholder="Email"></asp:TextBox>
-                <asp:Button ID="btnSignup" runat="server" Text="Sign Up" OnClick="btnSignup_Click" />
+                <asp:Button ID="btnSignup" runat="server" Text="Sign Up" OnClick="btnSignup_Click" CssClass="button buttonCool" />
                 <asp:Label ID="lblError" runat="server" ClientIDMode="AutoID" Enabled="False" ForeColor="Red" Text="Static" Visible="False"></asp:Label>
             </asp:Panel>
             <p>Already have an account? <a href="Default.aspx">Login here</a></p>

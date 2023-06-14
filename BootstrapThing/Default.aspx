@@ -17,7 +17,7 @@
                 <br />
                 <br />
                 <% } %>
-                <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" />
+                <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" CssClass="button buttonCool" />
             </asp:Panel>
             <p>Don't have an account? <a href="signup.aspx">Sign up here</a></p>
         </div>
