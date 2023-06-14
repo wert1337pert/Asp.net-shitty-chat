@@ -28,3 +28,20 @@ CREATE TABLE [dbo].[Users] (
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 ````
+Setup:
+- If you see an App_Data folder in visual studio, delete it because it probably is broken.
+- Create a new folder called App_Data and create a database named Main.mdf inside of the App_Data folder.
+- Create two tables with those two sql scripts above.
+- If you are having 404 errors when trying to access the aspx pages, just change the configuration from debug to release.
+
+Bad things about this site:
+- The security is very bad probably
+- Authentication token system right now is not complete and is insecure
+- Spamming messages is easy
+- Bad styling
+
+Good things about this site:
+- Written completely in asp.net csharp
+- Free to use since I don't really care about it
+- Might actually become a good place to start if you design a good security system
+- Javascript is surprisingly reliable 
