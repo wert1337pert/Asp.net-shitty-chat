@@ -12,7 +12,7 @@ namespace BootstrapThing
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string constring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dkoby\source\repos\BootstrapThing\BootstrapThing\App_Data\Main.mdf;Integrated Security=True";
+            string constring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + HttpContext.Current.Server.MapPath("~") + @"App_Data\Main.mdf;Integrated Security=True";
 
             using (SqlConnection cnn = new SqlConnection(constring))
             {
