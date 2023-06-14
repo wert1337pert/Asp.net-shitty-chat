@@ -121,12 +121,11 @@
             function sendChatMessage() {
                 const message = document.getElementById('txtMessage').value;
 
-                fetch('/api/sendchat.ashx', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ message: message })
+                const params = new URLSearchParams();
+                params.append('message', message);
+
+                fetch('/api/sendchat.ashx?' + params.toString(), {
+                    method: 'POST'
                 })
                     .then(response => response.json())
                     .then(data => {

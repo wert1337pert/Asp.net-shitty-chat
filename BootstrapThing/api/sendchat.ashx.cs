@@ -15,45 +15,63 @@ namespace BootstrapThing.api
         string constring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dkoby\source\repos\BootstrapThing\BootstrapThing\App_Data\Main.mdf;Integrated Security=True";
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.ContentType = "application/json";
+           context.Response.ContentType = "application/json";
             using (SqlConnection cnn = new SqlConnection(constring))
             {
                 try
                 {
-                    HttpCookie Token = context.Request.Cookies["Authentication"];
-                    if (Token != null)
+                    if(context.Request.Params["message"] != null && StripHtmlTagsAndSpecialCharacters(context.Request.Params["message"]) != "")
                     {
-                        cnn.Open();
-                        string query1 = "SELECT * FROM Users WHERE AuthToken = @token";
-                        using(SqlCommand user = new SqlCommand(query1, cnn))
+                        string text = StripHtmlTagsAndSpecialCharacters(context.Request.Params["message"]);
+                        HttpCookie Token = context.Request.Cookies["Authentication"];
+                        if (Token != null)
                         {
-                            user.Parameters.AddWithValue("@token", Token.Value);
-                            SqlDataReader ReadUser = user.ExecuteReader();
-                            if (ReadUser.HasRows)
+                            cnn.Open();
+                            string query1 = "SELECT * FROM Users WHERE AuthToken = @token";
+                            using (SqlCommand user = new SqlCommand(query1, cnn))
                             {
-                                string userid = "";
-                                while (ReadUser.Read())
+                                user.Parameters.AddWithValue("@token", Token.Value);
+                                SqlDataReader ReadUser = user.ExecuteReader();
+                                if (ReadUser.HasRows)
                                 {
-                                    userid = ReadUser["Id"].ToString();
-                                }
-                                ReadUser.Close();
+                                    string userid = "";
+                                    while (ReadUser.Read())
+                                    {
+                                        userid = ReadUser["Id"].ToString();
+                                    }
+                                    ReadUser.Close();
 
-                                string
+                                    string query2 = "INSERT INTO Chats (Content, Userid, PostedDate) VALUES (@content, @userid, @date)";
+                                    using (SqlCommand chatcreate = new SqlCommand(query2, cnn))
+                                    {
+                                        chatcreate.Parameters.AddWithValue("@content", text);
+                                        chatcreate.Parameters.AddWithValue("@userid", userid);
+                                        chatcreate.Parameters.AddWithValue("@date", DateTime.Now.ToString("MM/dd/yyyy"));
+                                        chatcreate.ExecuteNonQuery();
+
+                                        context.Response.Write("{\"error\":\"none\"}");
+                                    }
+                                }
+                                else
+                                {
+                                    context.Response.Write("{\"error\":\"Invalid authentication\"}");
+                                }
                             }
-                            else
-                            {
-                                context.Response.Write("{\"error\":\"Invalid authentication\"}");
-                            }
+                        }
+                        else
+                        {
+                            context.Response.Write("{\"error\":\"Not signed in\"}");
                         }
                     }
                     else
                     {
-                        context.Response.Write("{\"error\":\"Not signed in\"}");
+                        context.Response.Write("{\"error\":\"lolol\"}");
                     }
+                    
                 }
                 catch (Exception ex)
                 {
-                    context.Response.Write("{\"error\":\"failed to connect to db\"}");
+                    context.Response.Write("{\"error\":\"failed to connect to db => "+ex.Message+"\"}");
                 }
             }
 
