@@ -23,6 +23,36 @@ namespace BootstrapThing
                     {
                         Response.Redirect("/Default.aspx");
                     }
+                    else
+                    {
+                        cnn.Open();
+                        string query1 = "SELECT * FROM Users WHERE AuthToken = @token";
+                        using (SqlCommand user = new SqlCommand(query1, cnn))
+                        {
+                            user.Parameters.AddWithValue("@token", Token.Value);
+                            SqlDataReader reader = user.ExecuteReader();
+
+                            if (reader.HasRows)
+                            {
+                                string ClientUsername = "";
+                                while (reader.Read())
+                                {
+                                    ClientUsername = reader["Username"].ToString() + "!";
+                                }
+
+                                lblUsername.Text = ClientUsername.ToLower();
+
+                                reader.Close();
+
+                            }
+                            else
+                            {
+                                Response.Redirect("/Logout.ashx");
+                            }
+                        }
+
+                        cnn.Close();
+                    }
                 }
                 catch (Exception ex)
                 {

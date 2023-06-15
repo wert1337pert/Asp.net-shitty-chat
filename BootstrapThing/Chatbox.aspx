@@ -61,7 +61,7 @@
 <body>
     <form runat="server">
         <div class="container">
-            <h1>Chatbox - Static</h1>
+            <h1>Welcome, <asp:Label ID="lblUsername" runat="server" Text="Static"></asp:Label></h1>
             <div class="chat-container">
                 <asp:Panel ID="pnlMessages" runat="server">
                     <!-- Messages will be dynamically generated here -->
