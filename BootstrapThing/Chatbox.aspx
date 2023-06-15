@@ -71,7 +71,6 @@
                 <asp:TextBox ID="txtMessage" runat="server" placeholder="Type your message..."></asp:TextBox>
                 <asp:Button ID="btnSend" runat="server" Text="Send" OnClientClick="sendChatMessage(); return false;" CssClass="button buttonCool" />
                 <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CssClass="button buttonCool" />
-
             </asp:Panel>
         </div>
 
